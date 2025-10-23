@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Linux Project | Porsche-Style</title>
 
-<!-- Font Awesome иконкалар үшін -->
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -15,7 +15,7 @@
   --accent: #ffcc00;
   --secondary: #1a1a1a;
   --font: "Times New Roman", serif;
-  --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 0.5s ease;
 }
 [data-theme="light"] {
   --bg: #ffffff;
@@ -33,113 +33,139 @@ body {
   color: var(--text);
   transition: background var(--transition), color var(--transition);
 }
+
+/* Header */
 header {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 70px;
+  height: 60px;
   background: rgba(10,10,10,0.8);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 60px;
+  padding: 0 20px;
   z-index: 1000;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .logo {
-  font-size: 1.4rem;
-  letter-spacing: 2px;
+  font-size: 1.2rem;
   color: var(--accent);
   font-weight: bold;
+  letter-spacing: 1px;
+}
+nav {
+  display: flex;
+  align-items: center;
 }
 nav a {
   color: var(--text);
   text-decoration: none;
-  margin: 0 20px;
+  margin: 0 12px;
   font-weight: 600;
+  font-size: 0.95rem;
   position: relative;
 }
 nav a::after {
-  content:"";
-  position:absolute;
-  left:0; bottom:-5px;
-  width:0; height:2px;
-  background:var(--accent);
-  transition:width 0.3s ease;
+  content: "";
+  position: absolute;
+  left: 0; bottom: -5px;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
 }
-nav a:hover::after {width:100%;}
-.toggle-theme {
-  font-size:1.4rem;
-  cursor:pointer;
+nav a:hover::after {width: 100%;}
+
+/* Burger menu */
+.burger {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
+@media (max-width: 768px) {
+  nav {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    background: var(--secondary);
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    transition: right 0.3s ease;
+  }
+  nav.show {
+    right: 0;
+  }
+  nav a {
+    margin: 15px 0;
+    font-size: 1.1rem;
+  }
+  .burger {
+    display: block;
+  }
+}
+
+/* Sections */
 section {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:100vh;
-  padding:0 10%;
-  gap:60px;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-  transition:opacity var(--transition), transform var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 80px 8% 50px;
+  gap: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap;
 }
-section:nth-child(even) {flex-direction: row-reverse;}
 section img {
-  width:45%;
-  max-width:500px;
-  filter: drop-shadow(0 0 25px rgba(255,215,0,0.3));
+  width: 80%;
+  max-width: 350px;
+  filter: drop-shadow(0 0 20px rgba(255,215,0,0.3));
   transition: transform var(--transition);
 }
 section img:hover {transform: scale(1.05);}
 .text {
-  width:45%;
+  width: 100%;
+  text-align: center;
 }
-h1,h2 {
-  font-size:2.8rem;
-  margin-bottom:20px;
-  color:var(--accent);
+h1, h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: var(--accent);
 }
 p {
-  line-height:1.7;
-  font-size:1.1rem;
-  opacity:0.9;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
 }
 .btn {
-  display:inline-block;
-  margin-top:25px;
-  padding:12px 30px;
-  background:var(--accent);
-  color:var(--bg);
-  text-decoration:none;
-  font-weight:bold;
-  border-radius:6px;
-  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .btn:hover {
-  transform:translateY(-3px);
-  box-shadow:0 5px 20px rgba(255,215,0,0.4);
-}
-.fade {opacity:0; transform:translateY(60px);}
-.fade.show {opacity:1; transform:translateY(0);}
-footer {
-  background:var(--secondary);
-  text-align:center;
-  padding:40px 20px;
-  font-size:0.9rem;
-  color:var(--text);
-  border-top:1px solid rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255,215,0,0.4);
 }
 
-/* Байланыс секциясы */
+/* Contact */
 .contact-icons {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 12px;
   margin-top: 20px;
 }
 .contact-icons a {
   color: var(--accent);
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -149,15 +175,22 @@ footer {
   transform: translateX(5px);
 }
 
-/* Responsive */
-@media (max-width:900px){
-  section {flex-direction:column; text-align:center; gap:30px;}
-  section img, .text {width:100%;}
-  header {padding:0 20px;}
-  nav a {margin:0 10px;}
+/* Footer */
+footer {
+  background: var(--secondary);
+  text-align: center;
+  padding: 20px;
+  font-size: 0.85rem;
+  color: var(--text);
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
+
+/* Animations */
+.fade {opacity: 0; transform: translateY(60px);}
+.fade.show {opacity: 1; transform: translateY(0); transition: 0.8s ease;}
 </style>
 </head>
+
 <body data-theme="dark">
 <header>
   <div class="logo">🐧 Linux Project</div>
@@ -169,7 +202,7 @@ footer {
     <a href="#arch">Arch</a>
     <a href="#contact">Байланыс</a>
   </nav>
-  <div class="toggle-theme" id="themeToggle">🌙</div>
+  <div class="burger" id="burger"><i class="fa-solid fa-bars"></i></div>
 </header>
 
 <section id="home" class="fade">
@@ -198,8 +231,7 @@ footer {
   <div class="text">
     <h2>Kali Linux</h2>
     <p>Kali Linux — этикалық хакерлер мен қауіпсіздік мамандарына арналған дистрибутив.  
-    Ішінде Nmap, Metasploit, Wireshark және басқа жүздеген құрал бар.  
-    Қауіпсіздік зерттеулері мен пентест үшін мінсіз.</p>
+    Ішінде Nmap, Metasploit, Wireshark және басқа жүздеген құрал бар.</p>
     <blockquote style="margin-top:15px; font-style:italic; color:var(--accent);">
       “The quieter you become, the more you are able to hear.”
     </blockquote>
@@ -240,15 +272,28 @@ footer {
   <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Contact">
 </section>
 
-<footer>© 2025 Linux Project by Adema</footer>
+<footer>© 2025 Linux Project by Ali</footer>
 
 <script>
-const toggle=document.getElementById("themeToggle");
-toggle.onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==="dark"?"light":"dark";toggle.textContent=document.body.dataset.theme==="dark"?"🌙":"☀️";};
-const faders=document.querySelectorAll('.fade');
-const appearOpt={threshold:0.2};
-const observer=new IntersectionObserver((entries,obs)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target);}});},appearOpt);
-faders.forEach(f=>observer.observe(f));
+const burger = document.getElementById("burger");
+const nav = document.querySelector("nav");
+burger.onclick = () => {
+  nav.classList.toggle("show");
+  burger.innerHTML = nav.classList.contains("show")
+    ? '<i class="fa-solid fa-xmark"></i>'
+    : '<i class="fa-solid fa-bars"></i>';
+};
+
+const faders = document.querySelectorAll(".fade");
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add("show");
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+faders.forEach(f => observer.observe(f));
 </script>
 </body>
 </html>
